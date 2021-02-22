@@ -1,1 +1,1 @@
-web: gunicorn summarymaker.wsgi --log-file -
+web: gunicorn summarymaker.wsgi --timeout 120 --log-file -
