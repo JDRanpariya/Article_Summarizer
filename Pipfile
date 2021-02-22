@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+python-dateutil = "*"
+django = "*"
+graphene-django = "*"
+python-dotenv = "*"
+django-cors-headers = "*"
+bs4 = "*"
+requests = "*"
+dj-database-url = "*"
+django-heroku = "*"
+gunicorn = "*"
+python-decouple = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
