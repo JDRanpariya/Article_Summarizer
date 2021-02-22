@@ -16,7 +16,7 @@ django-heroku = "*"
 gunicorn = "*"
 python-decouple = "*"
 transformers = "*"
-torch = "*"
+tensorflow-cpu = "*"
 [dev-packages]
 
 [requires]
