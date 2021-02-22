@@ -1,1 +1,1 @@
-web: gunicorn summarymaker.wsgi
+web: gunicorn summarymaker.wsgi --log-file -
