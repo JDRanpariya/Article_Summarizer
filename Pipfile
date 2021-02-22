@@ -15,7 +15,7 @@ dj-database-url = "*"
 django-heroku = "*"
 gunicorn = "*"
 python-decouple = "*"
-transformers = "*"
+transformers[torch] = "*"
 [dev-packages]
 
 [requires]
