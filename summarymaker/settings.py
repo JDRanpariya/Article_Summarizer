@@ -84,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'summarymaker.wsgi.application'
+# WSGI_APPLICATION = 'summarymaker.wsgi.application'
 
 
 # Database
@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'summarymaker.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'article_summary',
     }
 }
