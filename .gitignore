@@ -1,17 +1,11 @@
 # Python/Django (backend)
 # Python compiled files and caches
 backend/*.pyc
-backend/__pycache__/
+__pycache__/
 backend/*.pyo
 backend/*.pyd
-backend/.pytest_cache/
-backend/*.egg-info/
-
-# Virtual environments
-backend/venv/
-backend/env/
-backend/.venv/
-backend/ENV/
+.pytest_cache/
+*.egg-info/
 
 # Django-specific
 backend/*.sqlite3
