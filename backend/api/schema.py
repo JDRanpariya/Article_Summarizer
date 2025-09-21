@@ -40,11 +40,27 @@ class ScrapeSummary(graphene.Mutation):
 
     def mutate(self, info, url):
         article = Article(url=url)
-        article.scrapeSave()
+        article.save()
 
         return ScrapeSummary(article=article)
+
+
+class DeleteArticle(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+
+    ok = graphene.Boolean()
+
+    def mutate(self, info, id):
+        try:
+            article = Article.objects.get(pk=id)
+            article.delete()
+            return DeleteArticle(ok=True)
+        except Article.DoesNotExist:
+            return DeleteArticle(ok=False)
 
 
 class Mutation(graphene.ObjectType):
     create_summary = CreateSummary.Field()
     scrape_summary = ScrapeSummary.Field()
+    delete_article = DeleteArticle.Field()

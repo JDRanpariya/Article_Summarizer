@@ -2,8 +2,6 @@ import React from 'react'
 import Lottie from 'react-lottie';
 import animationData from './lurking-cat-loading.json';
 
-
-
 export default function Loading() {
 
     const defaultOptions = {

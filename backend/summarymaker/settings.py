@@ -66,6 +66,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://article-summarizer-clientv1.vercel.app",
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 ROOT_URLCONF = 'summarymaker.urls'
 
 TEMPLATES = [

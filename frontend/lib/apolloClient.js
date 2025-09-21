@@ -7,7 +7,8 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
-        uri: 'http://localhost:3000/' //'https://article-summarizerv1.herokuapp.com/graphql/', // e.g. https://www.myapi.com/api/v2
+        // Use Backend URL 'https://article-summarizerv1.herokuapp.com/graphql/', // e.g. https://www.myapi.com/api/v2
+        uri: 'http://localhost:8000/graphql/' 
     }),
     cache: new InMemoryCache(),
   });

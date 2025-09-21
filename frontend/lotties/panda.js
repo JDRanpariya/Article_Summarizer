@@ -2,10 +2,6 @@ import React from 'react'
 import Lottie from 'react-lottie';
 import animationData from './panda.json';
 
-import '../pages/_app'
-
-
-
 export default function Panda({ height, width }) {
 
     const defaultOptions = {

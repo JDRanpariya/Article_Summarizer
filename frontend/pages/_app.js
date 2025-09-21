@@ -1,6 +1,6 @@
 import "../styles/tailwind.css";
 import React from 'react';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 import { useApollo } from '../lib/apollo';
 
 function MyApp({ Component, pageProps }) {
@@ -14,6 +14,5 @@ function MyApp({ Component, pageProps }) {
   </ApolloProvider>
 );
 };
-
 
 export default MyApp

@@ -1,7 +1,9 @@
 import Head from "next/head";
 import "./_app.js";
 import { React, useState } from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client/react";
+import ThemeToggle from "../components/Toggle";
+
 import {
   // GET_HISTORY_SUMMARY,
   GET_RECENT_SUMMARYS,
@@ -146,7 +148,7 @@ export default function Home() {
                 >
                   <div className="flex ">
                     <div className="text-left font-mono">
-                      ArticleID: {article.id}
+                      URL: {article.url}
                     </div>
                     <div className="flex-grow"></div>
                     <div className="text-right font-mono">
@@ -155,7 +157,7 @@ export default function Home() {
                     {/* {console.log((article.createdAt).split("T"))} */}
                   </div>
                   <div className="text-center mt-3 mb-3 text-gray-900">
-                    {article.summaryofarticle}
+                    {article.summary}
                   </div>
                 </div>
               ))}

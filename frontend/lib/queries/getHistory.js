@@ -5,7 +5,7 @@ const GET_HISTORY_SUMMARY = gql`
 {
     allarticles{
       id
-      summaryofarticle
+      summary
       content
       createdAt
     }
@@ -16,7 +16,8 @@ const GET_RECENT_SUMMARYS = gql`
 {
     recentArticles{
       id
-      summaryofarticle
+      url
+      summary
       content
       createdAt
     }
