@@ -1,80 +1,44 @@
 from django.db import models
 from transformers import pipeline
-from bs4 import BeautifulSoup as bs4
+from bs4 import BeautifulSoup
 import requests
-import time
 
-summarizer = pipeline("summarization")
+# Load summarizer once
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
-def getSummary(content):
-        max_chunk = 300
+def get_summary(content, max_chunk=300):
+    sentences = content.split(". ")
+    chunks, current_chunk = [], []
+    
+    for sentence in sentences:
+        words = sentence.split(" ")
+        if len(current_chunk) + len(words) <= max_chunk:
+            current_chunk.extend(words)
+        else:
+            chunks.append(" ".join(current_chunk))
+            current_chunk = words
+    if current_chunk:
+        chunks.append(" ".join(current_chunk))
 
-        content = content.replace('.', '.<eos>') # here we replace .,? and ! with <eos> along with punctuation to get easy split of sentences without removing punctuation
-        content = content.replace('?', '?<eos>')
-        content = content.replace('!', '!<eos>')  
-        content = content.replace('    ', '<eos>')      
+    res = summarizer(chunks, max_length=70, min_length=20, do_sample=False)
+    return " ".join(r["summary_text"] for r in res)
 
-        sentences = content.split('<eos>')
-
-        current_chunk = 0 
-        chunks = []
-        for sentence in sentences:
-            if len(chunks) == current_chunk + 1: 
-                if len(chunks[current_chunk]) + len(sentence.split(' ')) <= max_chunk:
-                    chunks[current_chunk].extend(sentence.split(' '))
-                else:
-                    current_chunk += 1
-                    chunks.append(sentence.split(' '))
-            else:
-                print(current_chunk)
-                chunks.append(sentence.split(' '))
-
-        for chunk_id in range(len(chunks)):
-            chunks[chunk_id] = ' '.join(chunks[chunk_id])
-
-        res = summarizer(chunks, max_length=70, min_length=20, do_sample=False)
-
-        full_summary = ''.join([summ['summary_text'] for summ in res])
-
-        return full_summary
-
-def scrapeArticle(url):
-
-    raw_res = requests.get(url)
-    soup = bs4(raw_res.content, 'html.parser')
-    raw_text = soup.text.replace("\n","").replace("\t","")
-    word_count = int(len(soup.text.replace("\n","").replace("\t",""))/5)
-
-    return raw_text
-
-# Create your models here.
-
-class urlIn(models.Model):
-    id = models.IntegerField(primary_key=True)
-    url = models.URLField( blank=True, null=True)
-
-    class Meta:
-        #managed = False
-        db_table = 'urlin'
-
+def scrape_article(url):
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, "html.parser")
+    # Better: only <p> tags
+    text = " ".join([p.get_text() for p in soup.find_all("p")])
+    return text.strip()
 
 class Article(models.Model):
-    id = models.IntegerField(primary_key=True)
-    content = models.TextField(default=None, null=True)
-    url = models.CharField(default=None, max_length=500, null=True)
+    url = models.URLField(max_length=500, unique=True)
+    content = models.TextField(null=True, blank=True)
+    summary = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    summaryofarticle = models.TextField()
-    
-    def scrapeSave(self, *args, **kwargs):
-        if not self.id:
-            self.content = scrapeArticle(self.url)
-            time.sleep(0.5)
-            self.summaryofarticle = getSummary(self.content)
-        
-        return super().save(*args, **kwargs)
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.summaryofarticle = getSummary(self.content)
-
-        return super().save(*args, **kwargs)
+        if not self.content and self.url:
+            self.content = scrape_article(self.url)
+        if not self.summary and self.content:
+            self.summary = get_summary(self.content)
+        super().save(*args, **kwargs)
