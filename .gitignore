@@ -1,28 +1,85 @@
-.env
-!.env.example
+# Python/Django (backend)
+# Python compiled files and caches
+backend/*.pyc
+backend/__pycache__/
+backend/*.pyo
+backend/*.pyd
+backend/.pytest_cache/
+backend/*.egg-info/
 
-.DS_STORE
-node_modules
-scripts/flow/*/.flowconfig
-.flowconfig
-*~
-*.pyc
-.grunt
-_SpecRunner.html
-__benchmarks__
-build/
-remote-repo/
-coverage/
-.module-cache
-fixtures/dom/public/react-dom.js
-fixtures/dom/public/react.js
-test/the-files-to-test.generated.js
-*.log*
-chrome-user-data
+# Virtual environments
+backend/venv/
+backend/env/
+backend/.venv/
+backend/ENV/
+
+# Django-specific
+backend/*.sqlite3
+backend/db.sqlite3
+backend/staticfiles/
+backend/media/
+backend/logs/
+backend/*.log
+backend/local_settings.py
+backend/settings/local.py
+backend/.env
+backend/.env.*
+backend/env.local
+backend/.secret
+
+# JavaScript/Next.js/Tailwind (frontend)
+# Node.js dependencies
+frontend/node_modules/
+frontend/.pnp
+frontend/.yarn/cache
+frontend/yarn.lock
+frontend/package-lock.json
+
+# Next.js build and cache
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.vercel
+frontend/.turbo/
+
+# Tailwind CSS output (if not using Next.js built-in Tailwind)
+frontend/public/css/*.css  # Only if you have custom Tailwind output
+frontend/dist/
+
+# Environment variables
+frontend/.env
+frontend/.env.local
+frontend/.env.development
+frontend/.env.production
+frontend/.env.*
+
+# General monorepo
+# Editor and IDE files
+.vscode/
+.idea/
 *.sublime-project
 *.sublime-workspace
-.idea
-*.iml
-.vscode
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.cache
+*.tmp
 *.swp
-*.swo
+*.bak
+
+# Build artifacts
+dist/
+build/
+
+# Misc
+.env
+.env.*
+!.env.example
+*.pid
+*.seed
+*.rdb
+coverage/
