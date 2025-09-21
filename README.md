@@ -7,6 +7,8 @@ A web app for summarizing articles by pasting text or providing a URL, powered b
 - **Backend**: Django, GraphQL, SQLite
 - **AI**: Hugging Face Transformers
 
+![Overview](https://github.com/JDRanpariya/Article_Summarizer/blob/master/media/overview.png)
+
 ## Getting Started
 1. **Clone the repository**:
    ```bash
