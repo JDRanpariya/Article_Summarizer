@@ -14,6 +14,7 @@ A web app for summarizing articles by pasting text or providing a URL, powered b
 - [ ] Need to add features like queue, better loading and faster processing on backend
 - [ ] Extend Project
     - [ ] I want to extend this by making it place to get discussion of an article/opinions critically by imitating experts of the field and polymaths, to get different perspectives on it via LLMs
+    - [ ] Not just summarize but what would great minds in the field and polymaths would say about it after thinking critically and what are the actionable insights that you can implement as daily/periodic habits to improve your life using LLMs and maybe other methods
 
 ## Getting Started
 1. **Clone the repository**:
